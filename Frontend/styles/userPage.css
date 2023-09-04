@@ -1,0 +1,124 @@
+.my-account-page {
+  display: flex;
+  margin-top: 20px;
+  column-gap: 40px;
+}
+
+.avatar-user {
+  width: 20%;
+}
+
+.my-account-info {
+  font-size: 20px;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  background-color: white;
+  border-radius: 20px;
+  padding: 15px;
+  row-gap: 15px;
+}
+
+.name-user,
+.my-account-surname,
+.my-account-mail,
+.my-account-phone {
+  display: flex;
+  align-items: center;
+}
+
+.name,
+.surname,
+.e-mail,
+.phone {
+  width: 110px;
+}
+
+/* Login */
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  row-gap: 40px;
+}
+.slider-btns {
+  position: relative;
+  display: flex;
+  column-gap: 10px;
+  padding: 5px 0;
+}
+
+.btns-underline {
+  position: absolute;
+  bottom: 0;
+  height: 3px;
+  background-color: #ec2741;
+  transition: all 0.7s;
+}
+
+.slider-btn {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.slider {
+  margin-top: 40px;
+  width: 568px;
+  position: relative;
+  height: 400px;
+  display: flex;
+}
+
+.slider-page {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-radius: 10px;
+  background-color: #fff;
+  opacity: 0;
+  visibility: hidden;
+  padding: 30px 60px;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
+  transition: opacity, visiblity, transform 0.5s, 0.5s, 0.8s;
+  transform: rotateY(180deg);
+}
+
+.slider-page.active {
+  visibility: visible;
+  opacity: 1;
+  transform: rotateY(0deg);
+}
+
+form input {
+  height: 45px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  font-size: 18px;
+  padding-left: 10px;
+  width: 100%;
+}
+
+form div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  row-gap: 8px;
+}
+
+form div label {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+form button {
+  background-color: #d80027;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  border-radius: 10px;
+  padding: 16px 51px;
+}
