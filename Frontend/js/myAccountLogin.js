@@ -1,0 +1,1 @@
+document.cookie = `jwt-token=my-token-jwt`
