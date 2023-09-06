@@ -7,10 +7,7 @@ IConfiguration configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
     .Build();
 
-builder.Services.AddDbContext<DBContext>(options =>
-{
-    options.UseMySQL(configuration.GetConnectionString("DefaultConnection"));
-}, ServiceLifetime.Singleton);
+builder.Services.AddDbContext<DBContext>(options => options.UseMySQL(configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Singleton);
 
 builder.Services.AddCors(options =>
 {

@@ -18,38 +18,40 @@ namespace PartsShop.Controllers
     public class UsersController : ControllerBase
     {
         private readonly DBContext DBContext;
-        public readonly IConfiguration _config;
+        private readonly IConfiguration _config;
 
         public UsersController(DBContext DBContext, IConfiguration config)
-        {  
-            this.DBContext = DBContext; 
-            this._config = config;
+        {
+            this.DBContext = DBContext;
+            _config = config;
         }
 
-        [HttpGet("get-user-by-id")]
-        public async Task<ActionResult<UserDTO>> GetUserById(int id)
+        [HttpGet("verify-token")]
+        public async Task<ActionResult<UserDTO>> VerifyToken()
         {
-            UserDTO? User = await DBContext.Users.Select(user => new UserDTO
-            {
-                Id = user.Id,
-                Name = user.Name,
-                Surname = user.Surname,
-                Email = user.Email,
-                Phone = user.Phone,
-                Token = user.Token,
-                Password = user.PasswordHash,
-            }).FirstOrDefaultAsync(user => user.Id == id);
+            var user = await DBContext.Users.Where(user => user.Token == Request.Headers.Authorization.ToString()).FirstOrDefaultAsync();
 
-            if (User == null) 
+            if (user != null)
             {
-                return NotFound();
+                var userDTO = new UserDTO
+                {
+                    Id = user.Id,
+                    Name = user.Name,
+                    Surname = user.Surname,
+                    Email = user.Email,
+                    Phone = user.Phone,
+                    Token = user.Token,
+                };
+                return Ok(userDTO);
             }
-            return Ok(User);
+
+            return Unauthorized();
         }
 
         [HttpPost("user-login")]
         public async Task<ActionResult<UserDTO>> UserLogin(UserLoginModel userLogin)
         {
+
             var user = await DBContext.Users.FirstOrDefaultAsync(userEntity => userEntity.Email == userLogin.Email);
             if (user != null && BCrypt.Net.BCrypt.Verify(userLogin.Password, user.PasswordHash, true, BCrypt.Net.HashType.SHA256))
             {
@@ -64,11 +66,11 @@ namespace PartsShop.Controllers
                     Email = user.Email,
                     Phone = user.Phone,
                     Token = user.Token,
-                    Password = user.PasswordHash,
+                    Password = user.PasswordHash
                 };
-
                 return Ok(resultUser);
-            }
+            };
+
             return Unauthorized();
         }
 
@@ -99,25 +101,28 @@ namespace PartsShop.Controllers
             return Ok(userEntity);
         }
 
-        private string GenerateToken(int userId)
+        private string? GenerateToken(int userId)
         {
             string secretKey = _config["Jwt:Key"];
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var claims = new[]
+            if (secretKey != null)
             {
-                new Claim("userId", userId.ToString())
-            };
-            var token = new JwtSecurityToken(
-                issuer: _config["Jwt:Issuer"],
-                audience: _config["Jwt:Issuer"],
-                claims: claims,
-                expires: DateTime.Now.AddDays(7),
-                signingCredentials: creds
-                );
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                var claims = new[]
+                {
+                    new Claim("userId", userId.ToString())
+                };
+                var token = new JwtSecurityToken(
+                    issuer: _config["Jwt:Issuer"],
+                    audience: _config["Jwt:Issuer"],
+                    claims: claims,
+                    expires: DateTime.Now.AddDays(7),
+                    signingCredentials: creds
+                    );
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
-
+                return new JwtSecurityTokenHandler().WriteToken(token);
+            }
+            return null;
         }
 
         private static string HashPassword(string password)

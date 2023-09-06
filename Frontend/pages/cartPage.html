@@ -1,187 +1,193 @@
 <!DOCTYPE html>
 <html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/style.css" />
+    <link rel="stylesheet" href="../styles/cart.css" />
+    <title>APart</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../styles/style.css" />
-  <link rel="stylesheet" href="../styles/cart.css" />
-  <title>APart</title>
-</head>
-
-<body>
-  <div class="container">
-    <div class="menu">
-      <div class="menu-wrapper">
-        <div class="logo"><img src="../assets/LogoSite.png" alt="" /></div>
-        <div class="nav-links">
-          <a class="nav-link" href="index.html">
-            <img class="nav-icon home-img" src="../assets/home.svg" alt="" />
-            <div class="link-text">Home</div>
-          </a>
-          <a class="nav-link" href="historyPage.html">
-            <img class="nav-icon history-img" src="../assets/history.svg" alt="" />
-            <div class="link-text">History</div>
-          </a>
-        </div>
-      </div>
-      <a href="userPage.html">
-        <div class="my-account">
-          <div class="user-avatar">
-            <img class="nav-icon" src="../assets/UserAvatar.svg" alt="" />
+  <body>
+    <div class="container">
+      <div class="menu">
+        <div class="menu-wrapper">
+          <div class="logo"><img src="../assets/LogoSite.png" alt="" /></div>
+          <div class="nav-links">
+            <a class="nav-link" href="index.html">
+              <img class="nav-icon home-img" src="../assets/home.svg" alt="" />
+              <div class="link-text">Home</div>
+            </a>
+            <a class="nav-link" href="historyPage.html">
+              <img
+                class="nav-icon history-img"
+                src="../assets/history.svg"
+                alt=""
+              />
+              <div class="link-text">History</div>
+            </a>
           </div>
-          <div class="user-name">John Doe</div>
         </div>
-      </a>
-    </div>
-    <div class="wrapper">
-      <header>
-        <div class="header-wrapper">
-          <div class="burger-menu-wrapper">
-            <div class="burger-menu">
-              <span></span>
+        <a href="userPage.html">
+          <div class="my-account">
+            <div class="user-avatar">
+              <img class="nav-icon" src="../assets/UserAvatar.svg" alt="" />
             </div>
+            <div class="user-name">John Doe</div>
           </div>
-          <div class="search-bar">
-            <img src="../assets/search-icon.svg" alt="" />
-            <form>
-              <input class="search-input" type="search" placeholder="Search for names, price lists, VIN etc..." />
-            </form>
-          </div>
-          <div class="btns-wrapper">
-            <button class="notifications-btn">
-              <div class="unread-notifications-count">0</div>
-              <div class="notifications-bnt-wrapper">
-                <div class="notifications-modal">
-                  <a href="orderMoreInfo.html">
-                    <div class="notification">
-                      <div class="notification-title">Заказ "Filter"</div>
-                      <div class="notification-description">
-                        В заказе под названием "Filter" отменена запчасть под
-                        названием "INA" с артикулом "453534"
+        </a>
+      </div>
+      <div class="wrapper">
+        <header>
+          <div class="header-wrapper">
+            <div class="burger-menu-wrapper">
+              <div class="burger-menu">
+                <span></span>
+              </div>
+            </div>
+            <div class="search-bar">
+              <img src="../assets/search-icon.svg" alt="" />
+              <form>
+                <input
+                  class="search-input"
+                  type="search"
+                  placeholder="Search for names, price lists, VIN etc..."
+                />
+              </form>
+            </div>
+            <div class="btns-wrapper">
+              <button class="notifications-btn">
+                <div class="unread-notifications-count">0</div>
+                <div class="notifications-bnt-wrapper">
+                  <div class="notifications-modal">
+                    <a href="orderMoreInfo.html">
+                      <div class="notification">
+                        <div class="notification-title">Заказ "Filter"</div>
+                        <div class="notification-description">
+                          В заказе под названием "Filter" отменена запчасть под
+                          названием "INA" с артикулом "453534"
+                        </div>
                       </div>
-                    </div>
-                  </a>
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </button>
-            <a class="cart-btn" href="cartPage.html"> 8 items for $7992 </a>
-          </div>
-        </div>
-      </header>
-      <div class="content">
-        <div class="title-page">Cart</div>
-        <div class="cart-wrapper">
-          <div class="cart-items">
-            <div class="cart-item">
-              <div class="name-item">INA</div>
-              <div class="description-item">Glass on Outlander CW5W</div>
-              <div class="vendor-code-item">453534</div>
-              <div class="count-item">
-                <button class="remove-count">-</button>
-                <div class="count">1</div>
-                <button class="add-count">+</button>
-              </div>
-              <div class="price-item">$ 999</div>
-              <button class="delete-item"></button>
-            </div>
-            <div class="cart-item">
-              <div class="name-item">INA</div>
-              <div class="description-item">Glass on Outlander CW5W</div>
-              <div class="vendor-code-item">453534</div>
-              <div class="count-item">
-                <button class="remove-count">-</button>
-                <div class="count">1</div>
-                <button class="add-count">+</button>
-              </div>
-              <div class="price-item">$ 999</div>
-              <button class="delete-item"></button>
-            </div>
-            <div class="cart-item">
-              <div class="name-item">INA</div>
-              <div class="description-item">Glass on Outlander CW5W</div>
-              <div class="vendor-code-item">453534</div>
-              <div class="count-item">
-                <button class="remove-count">-</button>
-                <div class="count">1</div>
-                <button class="add-count">+</button>
-              </div>
-              <div class="price-item">$ 999</div>
-              <button class="delete-item"></button>
-            </div>
-            <div class="cart-item">
-              <div class="name-item">INA</div>
-              <div class="description-item">Glass on Outlander CW5W</div>
-              <div class="vendor-code-item">453534</div>
-              <div class="count-item">
-                <button class="remove-count">-</button>
-                <div class="count">1</div>
-                <button class="add-count">+</button>
-              </div>
-              <div class="price-item">$ 999</div>
-              <button class="delete-item"></button>
-            </div>
-            <div class="cart-item">
-              <div class="name-item">INA</div>
-              <div class="description-item">Glass on Outlander CW5W</div>
-              <div class="vendor-code-item">453534</div>
-              <div class="count-item">
-                <button class="remove-count">-</button>
-                <div class="count">1</div>
-                <button class="add-count">+</button>
-              </div>
-              <div class="price-item">$ 999</div>
-              <button class="delete-item"></button>
-            </div>
-            <div class="cart-item">
-              <div class="name-item">INA</div>
-              <div class="description-item">Glass on Outlander CW5W</div>
-              <div class="vendor-code-item">453534</div>
-              <div class="count-item">
-                <button class="remove-count">-</button>
-                <div class="count">1</div>
-                <button class="add-count">+</button>
-              </div>
-              <div class="price-item">$ 999</div>
-              <button class="delete-item"></button>
-            </div>
-            <div class="cart-item">
-              <div class="name-item">INA</div>
-              <div class="description-item">Glass on Outlander CW5W</div>
-              <div class="vendor-code-item">453534</div>
-              <div class="count-item">
-                <button class="remove-count">-</button>
-                <div class="count">1</div>
-                <button class="add-count">+</button>
-              </div>
-              <div class="price-item">$ 999</div>
-              <button class="delete-item"></button>
-            </div>
-            <div class="cart-item">
-              <div class="name-item">INA</div>
-              <div class="description-item">Glass on Outlander CW5W</div>
-              <div class="vendor-code-item">453534</div>
-              <div class="count-item">
-                <button class="remove-count">-</button>
-                <div class="count">1</div>
-                <button class="add-count">+</button>
-              </div>
-              <div class="price-item">$ 999</div>
-              <button class="delete-item"></button>
+              </button>
+              <a class="cart-btn" href="cartPage.html"> 8 items for $7992 </a>
             </div>
           </div>
-        </div>
-        <div class="cart-info">
-          <div class="cart-total"></div>
-          <div class="create-order-btn">CHECK OUT</div>
+        </header>
+        <div class="content">
+          <div class="title-page">Cart</div>
+          <div class="cart-wrapper">
+            <div class="cart-items">
+              <div class="cart-item">
+                <div class="name-item">INA</div>
+                <div class="description-item">Glass on Outlander CW5W</div>
+                <div class="vendor-code-item">453534</div>
+                <div class="count-item">
+                  <button class="remove-count">-</button>
+                  <div class="count">1</div>
+                  <button class="add-count">+</button>
+                </div>
+                <div class="price-item">$ 999</div>
+                <button class="delete-item"></button>
+              </div>
+              <div class="cart-item">
+                <div class="name-item">INA</div>
+                <div class="description-item">Glass on Outlander CW5W</div>
+                <div class="vendor-code-item">453534</div>
+                <div class="count-item">
+                  <button class="remove-count">-</button>
+                  <div class="count">1</div>
+                  <button class="add-count">+</button>
+                </div>
+                <div class="price-item">$ 999</div>
+                <button class="delete-item"></button>
+              </div>
+              <div class="cart-item">
+                <div class="name-item">INA</div>
+                <div class="description-item">Glass on Outlander CW5W</div>
+                <div class="vendor-code-item">453534</div>
+                <div class="count-item">
+                  <button class="remove-count">-</button>
+                  <div class="count">1</div>
+                  <button class="add-count">+</button>
+                </div>
+                <div class="price-item">$ 999</div>
+                <button class="delete-item"></button>
+              </div>
+              <div class="cart-item">
+                <div class="name-item">INA</div>
+                <div class="description-item">Glass on Outlander CW5W</div>
+                <div class="vendor-code-item">453534</div>
+                <div class="count-item">
+                  <button class="remove-count">-</button>
+                  <div class="count">1</div>
+                  <button class="add-count">+</button>
+                </div>
+                <div class="price-item">$ 999</div>
+                <button class="delete-item"></button>
+              </div>
+              <div class="cart-item">
+                <div class="name-item">INA</div>
+                <div class="description-item">Glass on Outlander CW5W</div>
+                <div class="vendor-code-item">453534</div>
+                <div class="count-item">
+                  <button class="remove-count">-</button>
+                  <div class="count">1</div>
+                  <button class="add-count">+</button>
+                </div>
+                <div class="price-item">$ 999</div>
+                <button class="delete-item"></button>
+              </div>
+              <div class="cart-item">
+                <div class="name-item">INA</div>
+                <div class="description-item">Glass on Outlander CW5W</div>
+                <div class="vendor-code-item">453534</div>
+                <div class="count-item">
+                  <button class="remove-count">-</button>
+                  <div class="count">1</div>
+                  <button class="add-count">+</button>
+                </div>
+                <div class="price-item">$ 999</div>
+                <button class="delete-item"></button>
+              </div>
+              <div class="cart-item">
+                <div class="name-item">INA</div>
+                <div class="description-item">Glass on Outlander CW5W</div>
+                <div class="vendor-code-item">453534</div>
+                <div class="count-item">
+                  <button class="remove-count">-</button>
+                  <div class="count">1</div>
+                  <button class="add-count">+</button>
+                </div>
+                <div class="price-item">$ 999</div>
+                <button class="delete-item"></button>
+              </div>
+              <div class="cart-item">
+                <div class="name-item">INA</div>
+                <div class="description-item">Glass on Outlander CW5W</div>
+                <div class="vendor-code-item">453534</div>
+                <div class="count-item">
+                  <button class="remove-count">-</button>
+                  <div class="count">1</div>
+                  <button class="add-count">+</button>
+                </div>
+                <div class="price-item">$ 999</div>
+                <button class="delete-item"></button>
+              </div>
+            </div>
+          </div>
+          <div class="cart-info">
+            <div class="cart-total"></div>
+            <div class="create-order-btn">CHECK OUT</div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <script src="../js/test.js"></script>
-  <script src="../js/burgerMenu.js"></script>
-  <script src="../js/countOfItem.js"></script>
-  <script src="../js/notifications.js"></script>
-</body>
-
+    <script src="../js/verifyToken.js"></script>
+    <script src="../js/burgerMenu.js"></script>
+    <script src="../js/countOfItem.js"></script>
+    <script src="../js/notifications.js"></script>
+  </body>
 </html>

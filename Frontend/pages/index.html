@@ -1,84 +1,92 @@
 <!DOCTYPE html>
 <html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/style.css" />
+    <link rel="stylesheet" href="../styles/index.css" />
+    <title>APart</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../styles/style.css" />
-  <link rel="stylesheet" href="../styles/index.css" />
-  <title>APart</title>
-</head>
-
-<body>
-  <div class="container">
-    <div class="menu">
-      <div class="menu-wrapper">
-        <div class="logo"><img src="../assets/LogoSite.png" alt="" /></div>
-        <div class="nav-links">
-          <a class="nav-link active" href="index.html">
-            <img class="nav-icon home-img" src="../assets/home.svg" alt="" />
-            <div class="link-text">Home</div>
-          </a>
-          <a class="nav-link" href="historyPage.html">
-            <img class="nav-icon history-img" src="../assets/history.svg" alt="" />
-            <div class="link-text">History</div>
-          </a>
+  <body>
+    <div class="container">
+      <div class="menu">
+        <div class="menu-wrapper">
+          <div class="logo"><img src="../assets/LogoSite.png" alt="" /></div>
+          <div class="nav-links">
+            <a class="nav-link active" href="index.html">
+              <img class="nav-icon home-img" src="../assets/home.svg" alt="" />
+              <div class="link-text">Home</div>
+            </a>
+            <a class="nav-link" href="historyPage.html">
+              <img
+                class="nav-icon history-img"
+                src="../assets/history.svg"
+                alt=""
+              />
+              <div class="link-text">History</div>
+            </a>
+          </div>
         </div>
+        <a href="userPage.html">
+          <div class="my-account">Login</div>
+        </a>
       </div>
-      <a href="userPage.html">
-        <div class="my-account">Login</div>
-      </a>
-    </div>
-    <div class="wrapper">
-      <header>
-        <div class="header-wrapper">
-          <div class="burger-menu-wrapper">
-            <div class="burger-menu">
-              <span></span>
+      <div class="wrapper">
+        <header>
+          <div class="header-wrapper">
+            <div class="burger-menu-wrapper">
+              <div class="burger-menu">
+                <span></span>
+              </div>
             </div>
-          </div>
-          <div class="search-bar">
-            <img src="../assets/search-icon.svg" alt="" />
-            <form>
-              <input class="search-input" type="search" placeholder="Search for names, price lists, VIN etc..." />
-            </form>
-          </div>
-          <div class="btns-wrapper">
-            <button class="notifications-btn">
-              <div class="unread-notifications-count">0</div>
-              <div class="notifications-bnt-wrapper">
-                <div class="notifications-modal">
-                  <a href="orderMoreInfo.html">
-                    <div class="notification">
-                      <div class="notification-title">Заказ "Filter"</div>
-                      <div class="notification-description">
-                        В заказе под названием "Filter" отменена запчасть под
-                        названием "INA" с артикулом "453534"
+            <div class="search-bar">
+              <img src="../assets/search-icon.svg" alt="" />
+              <form>
+                <input
+                  class="search-input"
+                  type="search"
+                  placeholder="Search for names, price lists, VIN etc..."
+                />
+              </form>
+            </div>
+            <div class="btns-wrapper">
+              <button class="notifications-btn">
+                <div class="unread-notifications-count">0</div>
+                <div class="notifications-bnt-wrapper">
+                  <div class="notifications-modal">
+                    <a href="orderMoreInfo.html">
+                      <div class="notification">
+                        <div class="notification-title">Заказ "Filter"</div>
+                        <div class="notification-description">
+                          В заказе под названием "Filter" отменена запчасть под
+                          названием "INA" с артикулом "453534"
+                        </div>
                       </div>
-                    </div>
-                  </a>
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </button>
-            <a class="cart-btn" href="cartPage.html"> 8 items for $7992 </a>
-          </div>
-        </div>
-      </header>
-      <div class="content">
-        <div class="title-page">Home</div>
-        <div class="home-content">
-          <div class="slider">
-            <div class="slider-nav">
-              <button class="slider-btn active">Catalog</button>
-              <button class="slider-btn">Manufactures</button>
+              </button>
+              <a class="cart-btn" href="cartPage.html"> 8 items for $7992 </a>
             </div>
-            <div class="slider-pages">
-              <div class="slider-wrapper">
-                <div class="slider-page">
-                  <div class="parts"></div>
-                </div>
-                <div class="slider-page">
-                  <div class="all-manufactures"></div>
+          </div>
+        </header>
+        <div class="content">
+          <div class="title-page">Home</div>
+          <div class="home-content">
+            <div class="slider">
+              <div class="slider-nav">
+                <button class="slider-btn active">Catalog</button>
+                <button class="slider-btn">Manufactures</button>
+              </div>
+              <div class="slider-pages">
+                <div class="slider-wrapper">
+                  <div class="slider-page">
+                    <div class="parts"></div>
+                  </div>
+                  <div class="slider-page">
+                    <div class="all-manufactures"></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -86,12 +94,10 @@
         </div>
       </div>
     </div>
-  </div>
-  <script src="../js/burgerMenu.js"></script>
-  <script src="../js/partSlider.js"></script>
-  <script src="../js/notifications.js"></script>
-  <script src="../js/searchParts.js"></script>
-  <script src="../js/test.js"></script>
-</body>
-
+    <script src="../js/verifyToken.js"></script>
+    <script src="../js/burgerMenu.js"></script>
+    <script src="../js/partSlider.js"></script>
+    <script src="../js/notifications.js"></script>
+    <script src="../js/searchParts.js"></script>
+  </body>
 </html>
