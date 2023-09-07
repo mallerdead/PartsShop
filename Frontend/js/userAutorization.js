@@ -36,6 +36,7 @@ function SignIn(event) {
     email: `${signInInputs[0].value}`,
     password: `${signInInputs[1].value}`,
   };
+  ``;
 
   fetch("https://localhost:7164/users/user-login", {
     method: "POST",

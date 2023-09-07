@@ -8,7 +8,7 @@
   width: 20%;
 }
 
-.my-account-info {
+.user-info {
   font-size: 20px;
   filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
   display: flex;
@@ -20,10 +20,10 @@
   row-gap: 15px;
 }
 
-.name-user,
-.my-account-surname,
-.my-account-mail,
-.my-account-phone {
+.user-name,
+.user-surname,
+.user-mail,
+.user-phone {
   display: flex;
   align-items: center;
 }
@@ -35,9 +35,7 @@
   width: 110px;
 }
 
-/* Login */
-
-form {
+.autorize-form {
   display: flex;
   flex-direction: column;
   align-items: center;

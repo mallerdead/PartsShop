@@ -16,30 +16,34 @@ function verifyToken() {
         }
         renderUser(data);
       })
-      .error((error) => console.error(error));
+      .catch((error) => console.error(error));
   } else {
     userAccount.innerHTML = "Login";
   }
 }
 
 function renderUser(user) {
-  userAccount.innerHTML = `
+  if (user != null) {
+    userAccount.innerHTML = `
     <div class="user-avatar">
       <img class="nav-icon" src="../assets/UserAvatar.svg" alt="">
     </div>
     <div class="user-name">${user.name} ${
-    user.surname != null ? user.surname : ""
-  }</div>`;
+      user.surname != null ? user.surname : ""
+    }</div>`;
+  }
 }
 
 function renderUserPage(user) {
-  content.innerHTML = `
-  <div class="user-page">
+  if (user != null) {
+    content.innerHTML = `
+  <div class="my-account-page">
     <img src="../assets/UserAvatar.svg" alt="" class="avatar-user" />
     <div class="user-info">
-      <div class="name-user">
+      <div class="user-name">
         <div class="name">Name:</div>
         <div class="name-wrapper">${user.name}</div>
+        <div class="edit-btn"></div>
       </div>
       <div class="user-surname">
         <div class="surname">Surname:</div>
@@ -55,6 +59,7 @@ function renderUserPage(user) {
       </div>
     </div>
   </div>`;
+  }
 }
 
 verifyToken();
