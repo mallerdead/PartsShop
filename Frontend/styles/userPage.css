@@ -40,9 +40,22 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  row-gap: 30px;
+  gap: 30px;
   margin: 30px 60px;
 }
+
+.sign-up-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.register-btn-wrapper {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
 
 .slider-btns {
   position: relative;
@@ -66,7 +79,7 @@
 
 .slider {
   margin-top: 40px;
-  width: 568px;
+  max-width: calc(100% - 40px);
   position: relative;
   height: 400px;
   display: flex;
@@ -97,7 +110,7 @@ form input {
   border: 1px solid rgba(0, 0, 0, 0.3);
   font-size: 18px;
   padding-left: 10px;
-  width: 100%;
+  width: calc(100% - 12px);
 }
 
 form div {
@@ -118,5 +131,5 @@ form button {
   font-weight: 700;
   color: #fff;
   border-radius: 10px;
-  padding: 16px 51px;
+  padding: 13.5px 51px;
 }
