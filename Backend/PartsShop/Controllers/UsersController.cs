@@ -9,6 +9,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Cors;
+using System.Runtime.CompilerServices;
+using System.Text.Json.Nodes;
+using Newtonsoft.Json.Linq;
 
 namespace PartsShop.Controllers
 {
@@ -27,31 +30,56 @@ namespace PartsShop.Controllers
         }
 
         [HttpGet("verify-token")]
-        public async Task<ActionResult<UserDTO>> VerifyToken()
+        public async Task<ActionResult<int>> VerifyToken()
         {
             var user = await DBContext.Users.Where(user => user.Token == Request.Headers.Authorization.ToString()).FirstOrDefaultAsync();
 
             if (user != null)
             {
-                var userDTO = new UserDTO
-                {
-                    Id = user.Id,
-                    Name = user.Name,
-                    Surname = user.Surname,
-                    Email = user.Email,
-                    Phone = user.Phone,
-                    Token = user.Token,
-                };
-                return Ok(userDTO);
+                return Ok(user.Id);
             }
 
             return Unauthorized();
         }
 
+        [HttpGet("user/")]
+        public async Task<ActionResult<UserDTO>> GetUserById([FromQuery] int id)
+        {
+            var user = await DBContext.Users.Where(user => user.Id == id).FirstOrDefaultAsync();
+
+            if (user != null)
+            {
+                var userDto = new UserDTO()
+                {
+                    Id = user.Id,
+                    Name = user.Name,
+                    Surname = user.Surname,
+                    Email = user.Email,
+                    Phone = user.Phone
+                };
+
+                return Ok(userDto);
+            }
+
+            return NotFound();
+        }
+
+        [HttpPut("change-user-data")]
+        public async Task<ActionResult> ChangeUserName([FromBody] UserDTO newData)
+        {
+            User user = await DBContext.Users.Where(user => user.Id == newData.Id).FirstOrDefaultAsync();
+           
+            user.Name = newData.Name ?? user.Name;
+            user.Surname = newData.Surname ?? user.Surname;
+            user.Email = newData.Email ?? user.Email;
+            user.Phone = newData.Phone ?? user.Phone;
+            await DBContext.SaveChangesAsync();
+            return Ok(newData);
+        }
+
         [HttpPost("user-login")]
         public async Task<ActionResult<UserDTO>> UserLogin(UserLoginModel userLogin)
         {
-
             var user = await DBContext.Users.FirstOrDefaultAsync(userEntity => userEntity.Email == userLogin.Email);
             if (user != null && BCrypt.Net.BCrypt.Verify(userLogin.Password, user.PasswordHash, true, BCrypt.Net.HashType.SHA256))
             {
@@ -79,7 +107,7 @@ namespace PartsShop.Controllers
         {
             if (DBContext.Users.Where(user => user.Email == registeringUser.Email).Count() > 0) 
             {
-                return Conflict("Пользователь уже существует");
+                return Conflict();
             }
 
             var userEntity = new User
@@ -101,7 +129,7 @@ namespace PartsShop.Controllers
             return Ok(userEntity);
         }
 
-        private string? GenerateToken(int userId)
+        private string? GenerateToken(int userId) 
         {
             string secretKey = _config["Jwt:Key"];
             if (secretKey != null)

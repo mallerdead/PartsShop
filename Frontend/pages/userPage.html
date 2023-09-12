@@ -1,125 +1,168 @@
 <!DOCTYPE html>
 <html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/style.css" />
+    <link rel="stylesheet" href="../styles/userPage.css" />
+    <title>APart</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../styles/style.css" />
-  <link rel="stylesheet" href="../styles/userPage.css" />
-  <title>APart</title>
-</head>
-
-<body>
-  <div class="container">
-    <div class="menu">
-      <div class="menu-wrapper">
-        <div class="logo"><img src="../assets/LogoSite.png" alt="" /></div>
-        <div class="nav-links">
-          <a class="nav-link" href="index.html">
-            <img class="nav-icon home-img" src="../assets/home.svg" alt="" />
-            <div class="link-text">Home</div>
-          </a>
-          <a class="nav-link" href="historyPage.html">
-            <img class="nav-icon history-img" src="../assets/history.svg" alt="" />
-            <div class="link-text">History</div>
-          </a>
+  <body>
+    <div class="container">
+      <div class="menu">
+        <div class="menu-wrapper">
+          <div class="logo"><img src="../assets/LogoSite.png" alt="" /></div>
+          <div class="nav-links">
+            <a class="nav-link" href="index.html">
+              <img class="nav-icon home-img" src="../assets/home.svg" alt="" />
+              <div class="link-text">Home</div>
+            </a>
+            <a class="nav-link" href="historyPage.html">
+              <img
+                class="nav-icon history-img"
+                src="../assets/history.svg"
+                alt=""
+              />
+              <div class="link-text">History</div>
+            </a>
+          </div>
         </div>
+        <a href="userPage.html">
+          <div class="my-account">Login</div>
+        </a>
       </div>
-      <a href="userPage.html">
-        <div class="my-account">Login</div>
-      </a>
-    </div>
-    <div class="wrapper">
-      <header>
-        <div class="header-wrapper">
-          <div class="burger-menu-wrapper">
-            <div class="burger-menu">
-              <span></span>
+      <div class="wrapper">
+        <header>
+          <div class="header-wrapper">
+            <div class="burger-menu-wrapper">
+              <div class="burger-menu">
+                <span></span>
+              </div>
+            </div>
+            <div class="search-bar">
+              <img src="../assets/search-icon.svg" alt="" />
+              <form>
+                <input
+                  class="search-input"
+                  type="search"
+                  placeholder="Search for names, price lists, VIN etc..."
+                />
+              </form>
+            </div>
+            <div class="btns-wrapper">
+              <button class="notifications-btn">
+                <div class="unread-notifications-count">0</div>
+                <div class="notifications-bnt-wrapper">
+                  <div class="notifications-modal">
+                    <a href="orderMoreInfo.html">
+                      <div class="notification">
+                        <div class="notification-title">Заказ "Filter"</div>
+                        <div class="notification-description">
+                          В заказе под названием "Filter" отменена запчасть под
+                          названием "INA" с артикулом "453534"
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </button>
+              <a class="cart-btn" href="cartPage.html"> 8 items for $7992 </a>
             </div>
           </div>
-          <div class="search-bar">
-            <img src="../assets/search-icon.svg" alt="" />
-            <form>
-              <input class="search-input" type="search" placeholder="Search for names, price lists, VIN etc..." />
-            </form>
+        </header>
+        <div class="content">
+          <div class="title-page">Welcome back</div>
+          <div class="slider-btns">
+            <div class="btns-underline"></div>
+            <button class="slider-btn active">Log in</button>
+            <button class="slider-btn">Registration</button>
           </div>
-          <div class="btns-wrapper">
-            <button class="notifications-btn">
-              <div class="unread-notifications-count">0</div>
-              <div class="notifications-bnt-wrapper">
-                <div class="notifications-modal">
-                  <a href="orderMoreInfo.html">
-                    <div class="notification">
-                      <div class="notification-title">Заказ "Filter"</div>
-                      <div class="notification-description">
-                        В заказе под названием "Filter" отменена запчасть под
-                        названием "INA" с артикулом "453534"
-                      </div>
-                    </div>
-                  </a>
+          <div class="slider">
+            <div class="slider-page active">
+              <form class="autorize-form sign-in-form">
+                <div>
+                  <label for="email-login">Email</label>
+                  <input
+                    type="email"
+                    id="email-login"
+                    placeholder="example@gmail.com"
+                    required
+                  />
                 </div>
-              </div>
-            </button>
-            <a class="cart-btn" href="cartPage.html"> 8 items for $7992 </a>
-          </div>
-        </div>
-      </header>
-      <div class="content">
-        <div class="title-page">Welcome back</div>
-        <div class="slider-btns">
-          <div class="btns-underline"></div>
-          <button class="slider-btn active">Log in</button>
-          <button class="slider-btn">Registration</button>
-        </div>
-        <div class="slider">
-          <div class="slider-page active">
-            <form class="autorize-form sign-in-form">
-              <div>
-                <label for="email-login">Email</label>
-                <input type="email" id="email-login" placeholder="example@gmail.com" required />
-              </div>
-              <div>
-                <label for="password-login">Password</label>
-                <input type="password" id="password-login" placeholder="Enter 6 characters or more" required />
-              </div>
-              <button type="submit" class="login-button">Sign in</button>
-            </form>
-          </div>
-          <div class="slider-page register-page">
-            <form class="autorize-form sign-up-form">
-              <div>
-                <label for="name-register">Name</label>
-                <input type="text" id="name-register" required placeholder="Your name" />
-              </div>
-              <div>
-                <label for="surname-register">Surname</label>
-                <input type="text" id="surname-register" placeholder="Your surname" />
-              </div>
-              <div>
-                <label for="name-register">Email</label>
-                <input type="email" id="email-register" required placeholder="example@gmail.com" />
-              </div>
-              <div>
-                <label for="phone-register">Phone</label>
-                <input type="tel" id="phone-register" placeholder="+79999996886" />
-              </div>
-              <div>
-                <label for="password-register">Password</label>
-                <input type="password" id="password-register" placeholder="Enter 6 characters or more" minlength="6"
-                  required />
-              </div>
-              <div class="register-btn-wrapper"> <button type="submit" class="register-btn">Sign up</button></div>
-            </form>
+                <div>
+                  <label for="password-login">Password</label>
+                  <input
+                    type="password"
+                    id="password-login"
+                    placeholder="Enter 6 characters or more"
+                    required
+                  />
+                </div>
+                <button type="submit" class="login-button">Sign in</button>
+              </form>
+            </div>
+            <div class="slider-page register-page">
+              <form class="autorize-form sign-up-form">
+                <div>
+                  <label for="name-register">Name</label>
+                  <input
+                    type="text"
+                    id="name-register"
+                    required
+                    placeholder="Your name"
+                  />
+                </div>
+                <div>
+                  <label for="surname-register">Surname</label>
+                  <input
+                    type="text"
+                    id="surname-register"
+                    placeholder="Your surname"
+                  />
+                </div>
+                <div>
+                  <label for="name-register">Email</label>
+                  <input
+                    type="email"
+                    id="email-register"
+                    required
+                    placeholder="example@gmail.com"
+                  />
+                </div>
+                <div>
+                  <label for="phone-register">Phone</label>
+                  <input
+                    type="tel"
+                    id="phone-register"
+                    placeholder="+79999996886"
+                  />
+                </div>
+                <div>
+                  <label for="password-register">Password</label>
+                  <input
+                    type="password"
+                    id="password-register"
+                    placeholder="Enter 6 characters or more"
+                    minlength="6"
+                    required
+                  />
+                </div>
+                <div class="register-btn-wrapper">
+                  <button type="submit" class="register-btn">Sign up</button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <script src="../js/verifyToken.js"></script>
-  <script src="../js/burgerMenu.js"></script>
-  <script src="../js/userAutorization.js"></script>
-  <script src="../js/notifications.js"></script>
-  <script src="../js/userSlider.js"></script>
-</body>
-
+    <script src="../js/editField.js"></script>
+    <script src="../js/verifyToken.js"></script>
+    <script src="../js/userAutentification.js"></script>
+    <script src="../js/burgerMenu.js"></script>
+    <script src="../js/userAutorization.js"></script>
+    <script src="../js/notifications.js"></script>
+    <script src="../js/userSlider.js"></script>
+  </body>
 </html>

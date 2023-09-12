@@ -1,6 +1,6 @@
 .my-account-page {
   display: flex;
-  margin-top: 20px;
+  padding-top: 40px;
   column-gap: 40px;
 }
 
@@ -20,18 +20,38 @@
   row-gap: 15px;
 }
 
-.user-name,
-.user-surname,
-.user-mail,
-.user-phone {
-  display: flex;
-  align-items: center;
+.edit-btn {
+  position: absolute;
+  background-image: url(../assets/editIcon.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  right: 0;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  transition: all 0.3s ease;
 }
 
-.name,
-.surname,
-.e-mail,
-.phone {
+.edit-btn:hover {
+  background-image: url(../assets/editIconBack.svg);
+}
+
+.field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-right: 35px;
+}
+
+.field input {
+  color: black;
+  padding: 0;
+  border: 0;
+  font-size: 20px;
+}
+
+.name-field {
   width: 110px;
 }
 
@@ -55,7 +75,6 @@
   flex-direction: column;
   justify-content: flex-end;
 }
-
 
 .slider-btns {
   position: relative;

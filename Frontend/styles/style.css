@@ -98,6 +98,8 @@ body {
 
 .my-account .user-name {
   font-size: 24px;
+  max-width: 150px;
+  overflow-x: hidden;
 }
 
 header {

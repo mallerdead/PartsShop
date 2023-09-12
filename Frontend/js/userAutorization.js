@@ -21,12 +21,19 @@ function SignUp(event) {
     },
     body: JSON.stringify(user),
   })
-    .then((response) => response.json())
+    .then((response) => {
+      if (response.status === 200) {
+        return response.json();
+      } else if (response.status === 409) {
+        throw new Error("User already exists");
+      }
+    })
     .then((data) => {
       document.cookie = `token=${data.token}`;
-      verifyToken();
+      renderUser(data);
+      renderUserPage(data);
     })
-    .catch((error) => console.error(error));
+    .catch((error) => console.error(error.message));
 }
 
 function SignIn(event) {
@@ -47,8 +54,9 @@ function SignIn(event) {
   })
     .then((response) => response.json())
     .then((data) => {
+      renderUser(data);
+      renderUserPage(data);
       document.cookie = `token=${data.token};`;
-      verifyToken();
     })
     .catch((error) => console.error(error));
 }

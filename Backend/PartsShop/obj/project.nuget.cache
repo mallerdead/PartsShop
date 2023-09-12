@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "V2ZUmNrVH8vtAKItoiXWMk7xAwFBGFGyeYKmgqJ2p2jW7qGWFSHEMjql22TpXI8dH+Zex6aRVCRzqMXdR0ECQA==",
+  "dgSpecHash": "r+m6x2uzvU6VzzNQbfY//YTLOzEgbyo8sD+TQ8GyD0F399HbCmfUxKD3+ymrsU8EmUVNHdOc1NKogHE1GaULFw==",
   "success": true,
   "projectFilePath": "C:\\Users\\maller\\Desktop\\PartsShop\\Backend\\PartsShop\\PartsShop.csproj",
   "expectedPackageFiles": [
@@ -39,6 +39,7 @@
     "C:\\Users\\maller\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\maller\\.nuget\\packages\\mysql.data\\8.1.0\\mysql.data.8.1.0.nupkg.sha512",
     "C:\\Users\\maller\\.nuget\\packages\\mysql.entityframeworkcore\\7.0.5\\mysql.entityframeworkcore.7.0.5.nupkg.sha512",
+    "C:\\Users\\maller\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\maller\\.nuget\\packages\\portable.bouncycastle\\1.9.0\\portable.bouncycastle.1.9.0.nupkg.sha512",
     "C:\\Users\\maller\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
     "C:\\Users\\maller\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",

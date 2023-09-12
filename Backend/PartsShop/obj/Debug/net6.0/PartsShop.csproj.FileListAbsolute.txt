@@ -82,3 +82,4 @@ C:\Users\maller\Desktop\PartsShop\Backend\PartsShop\bin\Debug\net6.0\Microsoft.I
 C:\Users\maller\Desktop\PartsShop\Backend\PartsShop\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
 C:\Users\maller\Desktop\PartsShop\Backend\PartsShop\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\maller\Desktop\PartsShop\Backend\PartsShop\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\maller\Desktop\PartsShop\Backend\PartsShop\bin\Debug\net6.0\Newtonsoft.Json.dll
