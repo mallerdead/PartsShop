@@ -70,11 +70,11 @@ namespace PartsShop.Controllers
             User user = await DBContext.Users.Where(user => user.Id == newData.Id).FirstOrDefaultAsync();
            
             user.Name = newData.Name ?? user.Name;
-            user.Surname = newData.Surname ?? user.Surname;
+            user.Surname = newData.Surname == "" ? null : newData.Surname ?? user.Surname;
             user.Email = newData.Email ?? user.Email;
             user.Phone = newData.Phone ?? user.Phone;
             await DBContext.SaveChangesAsync();
-            return Ok(newData);
+            return Ok();
         }
 
         [HttpPost("user-login")]

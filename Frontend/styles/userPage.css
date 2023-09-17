@@ -9,6 +9,7 @@
 }
 
 .user-info {
+  position: relative;
   font-size: 20px;
   filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
   display: flex;
@@ -16,7 +17,7 @@
   min-width: 300px;
   background-color: white;
   border-radius: 20px;
-  padding: 15px;
+  padding: 50px 15px 15px 15px;
   row-gap: 15px;
 }
 
@@ -27,7 +28,6 @@
   background-position: center;
   background-size: contain;
   right: 0;
-  padding: 0;
   width: 24px;
   height: 24px;
   transition: all 0.3s ease;
@@ -35,6 +35,22 @@
 
 .edit-btn:hover {
   background-image: url(../assets/editIconBack.svg);
+}
+
+.exit-btn {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 26px;
+  height: 26px;
+}
+
+.exit-btn svg path {
+  stroke: black;
+  transition: stroke 0.3s ease;
+}
+.exit-btn:hover svg path {
+  stroke: red;
 }
 
 .field {
@@ -45,9 +61,13 @@
 }
 
 .field input {
-  color: black;
   padding: 0;
   border: 0;
+}
+
+.field input,
+.field input::placeholder {
+  color: black;
   font-size: 20px;
 }
 
