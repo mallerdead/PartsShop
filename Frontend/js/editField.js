@@ -57,9 +57,3 @@ function sendRequest(fieldData) {
     })
     .catch(console.error);
 }
-
-function userLogout() {
-  verifyToken()
-    .then(() => )
-    .catch((error) => console.error(error));
-}

@@ -1,4 +1,6 @@
-﻿namespace PartsShop.DTO
+﻿using PartsShop.Entities;
+
+namespace PartsShop.DTO
 {
     public class UserDTO
     {
@@ -8,6 +10,6 @@
         public string? Email { get; set; }
         public string? Phone { get; set; }
         public string? Password { get; set; }
-        public string? Token { get; set; }
+        public List<Notification> Notifications { get; set; } = new List<Notification>();
     }
 }

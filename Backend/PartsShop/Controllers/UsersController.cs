@@ -8,16 +8,11 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Cors;
-using System.Runtime.CompilerServices;
-using System.Text.Json.Nodes;
-using Newtonsoft.Json.Linq;
 
 namespace PartsShop.Controllers
 {
-    [Route("users")]
     [ApiController]
-    [EnableCors("AllowOrigin")]
+    [Route("users")]
     public class UsersController : ControllerBase
     {
         private readonly DBContext DBContext;
@@ -46,23 +41,27 @@ namespace PartsShop.Controllers
         public async Task<ActionResult<UserDTO>> GetUserById([FromQuery] int id)
         {
             var user = await DBContext.Users.Where(user => user.Id == id).FirstOrDefaultAsync();
-
+            var notifications = await DBContext.Notifications.ToListAsync();
+            
             if (user != null)
             {
-                var userDto = new UserDTO()
+
+                var userDTO = new UserDTO()
                 {
                     Id = user.Id,
                     Name = user.Name,
                     Surname = user.Surname,
                     Email = user.Email,
-                    Phone = user.Phone
+                    Phone = user.Phone,
+                    Notifications = user.Notifications
                 };
 
-                return Ok(userDto);
+                return Ok(userDTO);
             }
 
             return NotFound();
         }
+
 
         [HttpPut("change-user-data")]
         public async Task<ActionResult> ChangeUserName([FromBody] UserDTO newData)
@@ -78,7 +77,7 @@ namespace PartsShop.Controllers
         }
 
         [HttpPost("user-login")]
-        public async Task<ActionResult<UserDTO>> UserLogin(UserLoginModel userLogin)
+        public async Task<ActionResult<string>> UserLogin(UserLoginModel userLogin)
         {
             var user = await DBContext.Users.FirstOrDefaultAsync(userEntity => userEntity.Email == userLogin.Email);
             if (user != null && BCrypt.Net.BCrypt.Verify(userLogin.Password, user.PasswordHash, true, BCrypt.Net.HashType.SHA256))
@@ -86,17 +85,7 @@ namespace PartsShop.Controllers
                 user.Token = GenerateToken(user.Id);
                 await DBContext.SaveChangesAsync();
 
-                var resultUser = new UserDTO
-                {
-                    Id = user.Id,
-                    Name = user.Name,
-                    Surname = user.Surname,
-                    Email = user.Email,
-                    Phone = user.Phone,
-                    Token = user.Token,
-                    Password = user.PasswordHash
-                };
-                return Ok(resultUser);
+                return Ok(user.Token);
             };
 
             return Unauthorized();
@@ -105,7 +94,7 @@ namespace PartsShop.Controllers
         [HttpPost("user-registration")]
         public async Task<ActionResult<User>> UserRegistration(UserDTO registeringUser)
         {
-            if (DBContext.Users.Where(user => user.Email == registeringUser.Email).Count() > 0) 
+            if (DBContext.Users.Where(user => user.Email == registeringUser.Email).Count() > 0)
             {
                 return Conflict();
             }
@@ -128,6 +117,22 @@ namespace PartsShop.Controllers
 
             return Ok(userEntity);
         }
+
+        [HttpPost("delete-token-by-id")]
+        public async Task<ActionResult> DeleteToken([FromQuery] int id) {
+            var user = await DBContext.Users.FirstOrDefaultAsync(user => user.Id == id);
+
+            if (user != null)
+            {
+                user.Token = null;
+                await DBContext.SaveChangesAsync();
+
+                return Ok();
+            }
+
+            return NotFound();
+        }
+
 
         private string? GenerateToken(int userId) 
         {

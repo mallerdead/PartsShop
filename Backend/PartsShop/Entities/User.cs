@@ -1,4 +1,6 @@
-﻿namespace PartsShop.Entities
+﻿using Microsoft.Extensions.Hosting;
+
+namespace PartsShop.Entities
 {
     public class User
     {
@@ -9,5 +11,6 @@
         public string? Phone { get; set; }
         public string PasswordHash { get; set; } = null!;
         public string? Token { get; set; }
+        public List<Notification> Notifications { get; } = new List<Notification>();
     }
 }
