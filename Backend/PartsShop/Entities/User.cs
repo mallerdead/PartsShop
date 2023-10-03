@@ -12,5 +12,6 @@ namespace PartsShop.Entities
         public string PasswordHash { get; set; } = null!;
         public string? Token { get; set; }
         public List<Notification> Notifications { get; } = new List<Notification>();
+        public List<Part>
     }
 }

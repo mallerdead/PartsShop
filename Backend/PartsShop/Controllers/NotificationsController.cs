@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PartsShop.Data;
 
 namespace PartsShop.Controllers
@@ -18,13 +19,25 @@ namespace PartsShop.Controllers
         }
 
         [HttpPut("mark-as-read")]
-        public async Task<ActionResult> MarkNotificationAsRead([FromQuery] int notificationId) {
-            var notification = await DBContext.Notifications.FindAsync(notificationId);
+        public async Task<ActionResult> MarkNotificationAsRead([FromBody] NotificationData data)
+        {
+            var notification = await DBContext.Notifications.Where(notification => data.userId == notification.UserId && notification.Id == data.notificationId).FirstOrDefaultAsync();
+
             if (notification != null)
             {
-                return Ok(notification);
+                var isRead = notification.IsRead;
+                notification.IsRead = true;
+                await DBContext.SaveChangesAsync();
+                return Ok();
             }
+
             return NotFound();
+        }
+
+        public class NotificationData
+        {
+            public int userId { get; set; }
+            public int notificationId { get; set; }
         }
     }
 }

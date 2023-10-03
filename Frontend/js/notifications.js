@@ -11,17 +11,23 @@ notificationBtn.addEventListener("click", () => {
   notificationsModal.classList.toggle("active");
 });
 
-function addNotificationListener(notification) {
-  notification.addEventListener("mouseover", () => {});
+function addNotificationListener() {
+  const notifications = document.querySelectorAll(".notification");
+
+  notifications.forEach((notification) => {
+    notification.addEventListener("mouseover", () => {
+      if (!notification.classList.contains("read")) {
+        notification.classList.add("read");
+        verifyToken()
+          .then((id) => markNotificationsAsRead(id, notification.id))
+          .then(renderCountOfNotifications());
+      }
+    });
+  });
 }
 
 function renderCountOfNotifications() {
   notifications = document.querySelectorAll(".notification");
-  notifications.forEach((notification) =>
-    notification.addEventListener("mouseover", () =>
-      notification.classList.add("read")
-    )
-  );
   let countUnreadNotifications = Array.from(notifications).filter(
     (notification) => !notification.classList.contains("read")
   ).length;
@@ -36,10 +42,13 @@ function renderCountOfNotifications() {
 
 function renderNotifications(notifications) {
   const modalNotifications = document.querySelector(".notifications-modal");
+
   notifications.forEach((notification) => {
     modalNotifications.innerHTML += `
-    <a href="orderMoreInfo.html">
-      <div class="notification ${notification.isRead ? "read" : ""}">
+    <a href="${notification.link === null ? "" : notification.link}">
+      <div  class="notification ${notification.isRead ? "read" : ""}" id="${
+      notification.id
+    }">
         <div class="notification-title">${notification.title}</div>
         <div class="notification-description">
         ${notification.message}
@@ -47,5 +56,17 @@ function renderNotifications(notifications) {
       </div>
     </a>`;
   });
+
+  addNotificationListener();
   renderCountOfNotifications();
+}
+
+function markNotificationsAsRead(userId, notificationId) {
+  return fetch("https://localhost:7164/notifications/mark-as-read", {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({ userId, notificationId }),
+  });
 }
