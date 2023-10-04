@@ -1,5 +1,4 @@
-﻿using System.Net;
-using PartsShop.DTO;
+﻿using PartsShop.DTO;
 using PartsShop.Data;
 using PartsShop.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -66,15 +65,21 @@ namespace PartsShop.Controllers
         [HttpPut("change-user-data")]
         public async Task<ActionResult> ChangeUserName([FromBody] UserDTO newData)
         {
-            User user = await DBContext.Users.Where(user => user.Id == newData.Id).FirstOrDefaultAsync();
-           
-            user.Name = newData.Name ?? user.Name;
-            user.Surname = newData.Surname == "" ? null : newData.Surname ?? user.Surname;
-            user.Email = newData.Email ?? user.Email;
-            user.Phone = newData.Phone ?? user.Phone;
-            await DBContext.SaveChangesAsync();
-            return Ok();
+            var user = await DBContext.Users.Where(user => user.Id == newData.Id).FirstOrDefaultAsync();
+
+            if (user != null)
+            {
+                user.Name = newData.Name ?? user.Name;
+                user.Surname = newData.Surname == "" ? null : newData.Surname ?? user.Surname;
+                user.Email = newData.Email ?? user.Email;
+                user.Phone = newData.Phone ?? user.Phone;
+                await DBContext.SaveChangesAsync();
+                return Ok();
+            }
+
+            return BadRequest();
         }
+            
 
         [HttpPost("user-login")]
         public async Task<ActionResult<string>> UserLogin(UserLoginModel userLogin)
@@ -134,33 +139,37 @@ namespace PartsShop.Controllers
         }
 
 
-        private string? GenerateToken(int userId) 
+        private string? GenerateToken(int userId)
         {
             string secretKey = _config["Jwt:Key"];
+
             if (secretKey != null)
             {
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-                var claims = new[]
-                {
-                    new Claim("userId", userId.ToString())
-                };
+                var claims = new[] { new Claim("userId", userId.ToString()) };
                 var token = new JwtSecurityToken(
                     issuer: _config["Jwt:Issuer"],
                     audience: _config["Jwt:Issuer"],
                     claims: claims,
                     expires: DateTime.Now.AddDays(7),
-                    signingCredentials: creds
-                    );
+                    signingCredentials: creds);
 
                 return new JwtSecurityTokenHandler().WriteToken(token);
             }
+
             return null;
         }
 
         private static string HashPassword(string password)
         {
             return BCrypt.Net.BCrypt.HashPassword(password, BCrypt.Net.BCrypt.GenerateSalt(), true, BCrypt.Net.HashType.SHA256);
+        }
+
+        public class UserLoginModel
+        {
+            public string Email { get; set; } = null!;
+            public string Password { get; set; } = null!;
         }
     }
 }

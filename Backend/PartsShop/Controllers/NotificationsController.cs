@@ -9,13 +9,10 @@ namespace PartsShop.Controllers
     public class NotificationsController : Controller
     {
         private readonly DBContext DBContext;
-        private readonly IConfiguration _config;
 
-
-        public NotificationsController(DBContext DBContext, IConfiguration config)
+        public NotificationsController(DBContext DBContext)
         {
             this.DBContext = DBContext;
-            _config = config;
         }
 
         [HttpPut("mark-as-read")]

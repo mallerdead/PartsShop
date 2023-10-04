@@ -8,7 +8,9 @@ namespace PartsShop.Data
     public partial class DBContext : Microsoft.EntityFrameworkCore.DbContext
     {
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Part> Parts { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
+        public virtual DbSet<Manufacturer> Manufactures{ get; set; }
 
         public DBContext()
         {
@@ -55,6 +57,33 @@ namespace PartsShop.Data
                 entity.Property(e => e.Title).HasColumnName("Title");
                 entity.Property(e => e.Message).HasColumnName("Message");
                 entity.Property(e => e.IsRead).HasColumnName("IsRead");
+            });
+
+            modelBuilder.Entity<Part>(entity =>
+            {
+                entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+                entity.ToTable("parts");
+
+                entity.Property(e => e.Id).HasColumnName("Id");
+                entity.Property(e => e.ManufactureId).HasColumnName("ManufactureId");
+                entity.Property(e => e.Name).HasColumnName("Name");
+                entity.Property(e => e.VendorCode).HasColumnName("VendorCode");
+                entity.Property(e => e.Description).HasColumnName("Description");
+                entity.Property(e => e.Availability).HasColumnName("Availability");
+                entity.Property(e => e.Delivery).HasColumnName("Delivery");
+                entity.Property(e => e.Price).HasColumnName("Price");
+                entity.HasOne(d => d.Manufacturer).WithMany().HasForeignKey(d => d.ManufactureId);
+            });
+
+            modelBuilder.Entity<Manufacturer>(entity =>
+            {
+                entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+                entity.ToTable("manufactures");
+
+                entity.Property(e => e.Id).HasColumnName("Id");
+                entity.Property(e => e.Name).HasColumnName("Name");
             });
 
             OnModelCreatingPartial(modelBuilder);
