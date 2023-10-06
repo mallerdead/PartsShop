@@ -15,7 +15,6 @@ namespace PartsShop.Controllers
         {
             this.DBContext = DBContext;
         }
-
         [HttpGet("find-part")]
         public async Task<ActionResult<List<Part>>> FindPart([FromQuery] string searchData)
         {

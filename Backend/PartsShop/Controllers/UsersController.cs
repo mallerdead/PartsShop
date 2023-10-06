@@ -39,12 +39,13 @@ namespace PartsShop.Controllers
         [HttpGet("user/")]
         public async Task<ActionResult<UserDTO>> GetUserById([FromQuery] int id)
         {
-            var user = await DBContext.Users.Where(user => user.Id == id).FirstOrDefaultAsync();
             var notifications = await DBContext.Notifications.ToListAsync();
-            
+            var parts = await DBContext.Parts.ToListAsync();
+            var cart = await DBContext.Carts.ToListAsync();
+            var user = await DBContext.Users.Where(user => user.Id == id).FirstOrDefaultAsync();
+
             if (user != null)
             {
-
                 var userDTO = new UserDTO()
                 {
                     Id = user.Id,
@@ -52,6 +53,7 @@ namespace PartsShop.Controllers
                     Surname = user.Surname,
                     Email = user.Email,
                     Phone = user.Phone,
+                    Cart = new CartDTO(parts, user.Cart.PartsId),
                     Notifications = user.Notifications
                 };
 
@@ -65,17 +67,18 @@ namespace PartsShop.Controllers
         [HttpPut("change-user-data")]
         public async Task<ActionResult> ChangeUserName([FromBody] UserDTO newData)
         {
-            var user = await DBContext.Users.Where(user => user.Id == newData.Id).FirstOrDefaultAsync();
+                var user = await DBContext.Users.Where(user => user.Id == newData.Id).FirstOrDefaultAsync();
 
-            if (user != null)
-            {
-                user.Name = newData.Name ?? user.Name;
-                user.Surname = newData.Surname == "" ? null : newData.Surname ?? user.Surname;
-                user.Email = newData.Email ?? user.Email;
-                user.Phone = newData.Phone ?? user.Phone;
-                await DBContext.SaveChangesAsync();
-                return Ok();
-            }
+                if (user != null)
+                {
+                    user.Name = newData.Name ?? user.Name;
+                    user.Surname = newData.Surname == "" ? null : newData.Surname ?? user.Surname;
+                    user.Email = newData.Email ?? user.Email;
+                    user.Phone = newData.Phone ?? user.Phone;
+                    await DBContext.SaveChangesAsync();
+                    return Ok();
+                }
+            
 
             return BadRequest();
         }

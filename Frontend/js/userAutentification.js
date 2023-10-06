@@ -63,6 +63,7 @@ function getUser(id) {
       renderUser(data);
       renderUserPage(data);
       renderNotifications(data.notifications);
+      renderCart(data.cart);
     });
 }
 

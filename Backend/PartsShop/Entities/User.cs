@@ -11,6 +11,8 @@ namespace PartsShop.Entities
         public string? Phone { get; set; }
         public string PasswordHash { get; set; } = null!;
         public string? Token { get; set; }
+        public Cart? Cart { get; set; }
         public List<Notification> Notifications { get; } = new List<Notification>();
+        
     }
 }

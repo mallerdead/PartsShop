@@ -7,9 +7,11 @@ namespace PartsShop.Data
 {
     public partial class DBContext : Microsoft.EntityFrameworkCore.DbContext
     {
+
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Part> Parts { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
+        public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<Manufacturer> Manufactures{ get; set; }
 
         public DBContext()
@@ -44,6 +46,7 @@ namespace PartsShop.Data
                 entity.Property(e => e.Phone).HasMaxLength(12).HasColumnName("Phone");
                 entity.Property(e => e.PasswordHash).HasMaxLength(1000).HasColumnName("PasswordHash");
                 entity.Property(e => e.Token).HasMaxLength(1000).HasColumnName("Token");
+                entity.HasOne(e => e.Cart).WithOne().HasForeignKey<Cart>(d => d.UserId);
             });
 
             modelBuilder.Entity<Notification>(entity =>
@@ -84,6 +87,17 @@ namespace PartsShop.Data
 
                 entity.Property(e => e.Id).HasColumnName("Id");
                 entity.Property(e => e.Name).HasColumnName("Name");
+            });
+
+            modelBuilder.Entity<Cart>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.ToTable("carts");
+
+                entity.Property(e => e.Id).HasColumnName("Id");
+                entity.Property(e => e.UserId).HasColumnName("UserId");
+                //entity.Property(e => e.PartsId).HasColumnName("PartsId");
             });
 
             OnModelCreatingPartial(modelBuilder);

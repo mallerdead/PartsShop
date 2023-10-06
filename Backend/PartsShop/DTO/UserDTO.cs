@@ -10,6 +10,7 @@ namespace PartsShop.DTO
         public string? Email { get; set; }
         public string? Phone { get; set; }
         public string? Password { get; set; }
+        public CartDTO? Cart { get; set; }
         public List<Notification> Notifications { get; set; } = new List<Notification>();
     }
 }
