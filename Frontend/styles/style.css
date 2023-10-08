@@ -283,7 +283,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url(../assets/shoppingCart.svg);
+  background-image: url(../assets/shoppingCart.svg); /* TODO Change style for adaptive*/
   background-repeat: no-repeat;
   background-position: left;
   text-decoration: none;

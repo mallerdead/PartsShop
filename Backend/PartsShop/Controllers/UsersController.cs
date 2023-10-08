@@ -43,6 +43,7 @@ namespace PartsShop.Controllers
             var parts = await DBContext.Parts.ToListAsync();
             var cart = await DBContext.Carts.ToListAsync();
             var user = await DBContext.Users.Where(user => user.Id == id).FirstOrDefaultAsync();
+            var products = await DBContext.CartProducts.ToListAsync();
 
             if (user != null)
             {
@@ -53,7 +54,7 @@ namespace PartsShop.Controllers
                     Surname = user.Surname,
                     Email = user.Email,
                     Phone = user.Phone,
-                    Cart = new CartDTO(parts, user.Cart.PartsId),
+                    Cart = user.Cart,
                     Notifications = user.Notifications
                 };
 
@@ -67,22 +68,21 @@ namespace PartsShop.Controllers
         [HttpPut("change-user-data")]
         public async Task<ActionResult> ChangeUserName([FromBody] UserDTO newData)
         {
-                var user = await DBContext.Users.Where(user => user.Id == newData.Id).FirstOrDefaultAsync();
+            var user = await DBContext.Users.Where(user => user.Id == newData.Id).FirstOrDefaultAsync();
 
-                if (user != null)
-                {
-                    user.Name = newData.Name ?? user.Name;
-                    user.Surname = newData.Surname == "" ? null : newData.Surname ?? user.Surname;
-                    user.Email = newData.Email ?? user.Email;
-                    user.Phone = newData.Phone ?? user.Phone;
-                    await DBContext.SaveChangesAsync();
-                    return Ok();
-                }
-            
+            if (user != null)
+            {
+                user.Name = newData.Name ?? user.Name;
+                user.Surname = newData.Surname == "" ? null : newData.Surname ?? user.Surname;
+                user.Email = newData.Email ?? user.Email;
+                user.Phone = newData.Phone ?? user.Phone;
+                await DBContext.SaveChangesAsync();
+                return Ok();
+            }
 
             return BadRequest();
         }
-            
+
 
         [HttpPost("user-login")]
         public async Task<ActionResult<string>> UserLogin(UserLoginModel userLogin)

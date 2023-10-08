@@ -33,7 +33,6 @@ function renderParts(data) {
     </div>
   </div>`;
   manufacturesBlock.innerHTML = ``;
-  console.log(data);
   for (let part of data) {
     manufacturesBlock.innerHTML += `
     <div class="manufacture" id="${part.manufactureId}">

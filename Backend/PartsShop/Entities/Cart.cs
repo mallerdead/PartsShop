@@ -4,6 +4,6 @@
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-        public string PartsId { get; set; } = string.Empty;
+        public List<CartProduct>? Products { get; set; }
     }
 }

@@ -13,6 +13,7 @@ namespace PartsShop.Data
         public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<Manufacturer> Manufactures{ get; set; }
+        public virtual DbSet<CartProduct> CartProducts { get; set; }
 
         public DBContext()
         {
@@ -94,10 +95,13 @@ namespace PartsShop.Data
                 entity.HasKey(e => e.Id);
 
                 entity.ToTable("carts");
+            });
 
-                entity.Property(e => e.Id).HasColumnName("Id");
-                entity.Property(e => e.UserId).HasColumnName("UserId");
-                //entity.Property(e => e.PartsId).HasColumnName("PartsId");
+            modelBuilder.Entity<CartProduct>(entity =>
+            {
+                entity.HasKey(e => new { e.PartId, e.CartId });
+
+                entity.ToTable("cartproducts");
             });
 
             OnModelCreatingPartial(modelBuilder);
