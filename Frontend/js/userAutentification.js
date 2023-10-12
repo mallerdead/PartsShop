@@ -55,16 +55,18 @@ function renderUserPage(user) {
 }
 
 function getUser(id) {
-  return fetch(`https://localhost:7164/users/user?id=${id}`)
-    .then((response) => {
+  return fetch(`https://localhost:7164/users/user?id=${id}`).then(
+    (response) => {
       if (response.status === 200) return response.json();
-    })
-    .then((data) => {
-      renderUser(data);
-      renderUserPage(data);
-      renderNotifications(data.notifications);
-      renderCart(data.cart.products);
-    });
+    }
+  );
+}
+
+function renderUserData(data) {
+  renderUser(data);
+  renderUserPage(data);
+  renderNotifications(data.notifications);
+  renderCart(data.cart.products);
 }
 
 function userLogout() {
@@ -87,6 +89,6 @@ function userLogout() {
 
 verifyToken()
   .then((id) => {
-    getUser(id);
+    getUser(id).then(renderUserData);
   })
   .catch((error) => console.error(error));

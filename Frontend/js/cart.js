@@ -112,6 +112,21 @@ function decreaseCountPart(item) {
   );
 }
 
+function addToCart(item) {
+  verifyToken()
+    .then(getUser)
+    .then((data) => {
+      let requestBody = { PartId: item, CartId: data.cart.id, Count: "1" };
+
+      fetch(`https://localhost:7164/cart/add-to-cart`, {
+        //TODO fix add to cart
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(requestBody),
+      });
+    });
+}
+
 // if (partsInCart.length > 0) {
 //   partsInCart.forEach((part) => {
 //     removePart(part);

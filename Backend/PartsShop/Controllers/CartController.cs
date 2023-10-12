@@ -53,5 +53,18 @@ namespace PartsShop.Controllers
 
             return BadRequest();
         }
+
+        [HttpPost("add-to-cart")]
+        public async Task<ActionResult> AddToCartById([FromBody] CartProduct cartProduct)
+        {
+            if (cartProduct != null)
+            {
+                DBContext.CartProducts.Add(cartProduct);
+                await DBContext.SaveChangesAsync();
+                return Ok();
+            }
+
+            return BadRequest();
+        }
     }
 }

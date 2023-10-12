@@ -50,7 +50,13 @@ namespace PartsShop.Controllers
         {
             var part = await DBContext.Parts.Where(part => part.Id == id).FirstOrDefaultAsync();
             var manufactures = await DBContext.Manufactures.ToListAsync();
-            return Ok(part);
+
+            if (part != null)
+            {
+                return Ok(part);
+            }
+
+            return NotFound();
         }
     }
 }

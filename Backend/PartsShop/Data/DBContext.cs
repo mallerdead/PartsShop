@@ -73,6 +73,7 @@ namespace PartsShop.Data
                 entity.Property(e => e.ManufactureId).HasColumnName("ManufactureId");
                 entity.Property(e => e.Name).HasColumnName("Name");
                 entity.Property(e => e.VendorCode).HasColumnName("VendorCode");
+                entity.Property(e => e.PartSubDescription).HasColumnName("partSubDescription");
                 entity.Property(e => e.Description).HasColumnName("Description");
                 entity.Property(e => e.Availability).HasColumnName("Availability");
                 entity.Property(e => e.Delivery).HasColumnName("Delivery");

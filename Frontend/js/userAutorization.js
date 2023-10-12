@@ -28,7 +28,7 @@ function SignUp(event) {
     })
     .then((data) => {
       document.cookie = `token=${data.token}`;
-      verifyToken().then((id) => getUser(id));
+      verifyToken().then((id) => getUser(id).then(renderUserData));
     })
     .catch((error) => console.error(error.message));
 }
@@ -58,7 +58,8 @@ function SignIn(event) {
     })
     .then((data) => {
       document.cookie = `token=${data};`;
-      verifyToken().then((id) => getUser(id));
+      23;
+      verifyToken().then((id) => getUser(id).then(renderUserData));
     })
     .catch((error) => console.error(error));
 }

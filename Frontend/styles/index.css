@@ -13,7 +13,7 @@
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.more-info-to-part {
+.more-info {
   background-image: url(../assets/moreInfoIcon.svg);
   background-position: center;
   background-repeat: no-repeat;
@@ -22,7 +22,7 @@
   transition: all 0.3s ease;
 }
 
-.more-info-to-part:hover {
+.more-info:hover {
   background-image: url(../assets/moreInfoIconBack.svg);
 }
 
