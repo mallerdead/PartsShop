@@ -3,9 +3,7 @@ const partId = params.get("partId");
 const content = document.querySelector(".content");
 
 function renderPart(part) {
-  console.log(part);
   content.innerHTML = `
-  <div class="content">
   <div class="title-page">${part.name}</div>
   <img class="part-preview" src="../assets/boshFilter.svg" alt="">
   <div class="subtitle-part">${part.partSubDescription}</div>
@@ -31,8 +29,7 @@ function renderPart(part) {
       <img src="../assets/cartWhite.svg" alt="">ADD TO CART
     </button>
     <div class="price-part">$ ${part.price}</div>
-  </div>
-</div>`;
+  </div>`;
   addSlideBtnListeners();
   const addToCartBtn = document.querySelector(".add-to-cart-btn");
 
@@ -41,8 +38,4 @@ function renderPart(part) {
   });
 }
 
-renderPart(
-  JSON.parse(localStorage.getItem("searchResult")).find((obj) => {
-    return obj.id == partId;
-  })
-);
+getPartById(partId).then(renderPart);

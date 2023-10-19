@@ -17,18 +17,22 @@ namespace PartsShop.Controllers
         }
 
         [HttpPost("remove-part")]
-        public async Task<ActionResult> RemoveFromCart([FromQuery]int userId, int productId)
+        public async Task<ActionResult<Cart>> RemoveFromCart([FromBody] CartProduct cartProduct)
         {
-            var user = await DBContext.Users.FirstOrDefaultAsync(user => user.Id == userId);
-            
-            if (user != null)
+            var cart = await DBContext.Carts.Include(cart => cart.Products).ThenInclude(product => product.Part).FirstOrDefaultAsync(cart => cart.Id == cartProduct.CartId);
+
+            if (cart != null)
             {
-                var product = user?.Cart?.Products?.Find(product => product.PartId == productId);
+                var product = cart.Products.Find(product => product.PartId == cartProduct.PartId);
+
                 if (product != null)
                 {
-                    DBContext.CartProducts.Remove(product);
+                    cart.Products.Remove(product);
+                    cart.CalculateCount();
+                    cart.CalculatePrice();
                     await DBContext.SaveChangesAsync();
-                    return Ok();
+
+                    return Ok(cart);
                 }
             }
 
@@ -36,18 +40,22 @@ namespace PartsShop.Controllers
         }
 
         [HttpPost("change-count")]
-        public async Task<ActionResult> ChangeCount([FromQuery]int userId, int newCount, int productId)
+        public async Task<ActionResult<Cart>> ChangeCount([FromBody] CartProduct cartProduct)
         {
-            var user = await DBContext.Users.FirstOrDefaultAsync(user => user.Id == userId);
+            var cart = await DBContext.Carts.Include(cart => cart.Products).ThenInclude(product => product.Part).FirstOrDefaultAsync(cart => cart.Id == cartProduct.CartId);
 
-            if (user != null)
+            if (cart != null)
             {
-                var product = user?.Cart?.Products?.Find(product => product.PartId == productId);
+                var product = cart.Products?.Find(product => product.PartId == cartProduct.PartId);
+
                 if (product != null)
                 {
-                    product.Count = newCount;
+                    product.Count = cartProduct.Count;
+                    cart.CalculateCount();
+                    cart.CalculatePrice();
                     await DBContext.SaveChangesAsync();
-                    return Ok();
+
+                    return Ok(cart);
                 }
             }
 
@@ -55,13 +63,29 @@ namespace PartsShop.Controllers
         }
 
         [HttpPost("add-to-cart")]
-        public async Task<ActionResult> AddToCartById([FromBody] CartProduct cartProduct)
+        public async Task<ActionResult<Cart>> AddToCartById([FromBody] CartProduct cartProduct)
         {
-            if (cartProduct != null)
+            var cart = await DBContext.Carts.Include(cart => cart.Products).ThenInclude(product => product.Part).FirstOrDefaultAsync(cart => cart.Id == cartProduct.CartId);
+
+            if (cart != null)
             {
-                DBContext.CartProducts.Add(cartProduct);
+                var product = cart.Products.Find(product => product.PartId == cartProduct.PartId);
+
+                if (product != null)
+                {
+                    product.Count += cartProduct.Count;
+                }
+                else
+                {
+                    cartProduct.Part = DBContext.Parts.FirstOrDefault(part => part.Id == cartProduct.PartId);
+                    cart.Products.Add(cartProduct);
+                }
+
+                cart.CalculateCount();
+                cart.CalculatePrice();
                 await DBContext.SaveChangesAsync();
-                return Ok();
+
+                return Ok(cart);
             }
 
             return BadRequest();

@@ -66,7 +66,8 @@ function renderUserData(data) {
   renderUser(data);
   renderUserPage(data);
   renderNotifications(data.notifications);
-  renderCart(data.cart.products);
+  renderCart(data.cart);
+  renderOrders(data.orders);
 }
 
 function userLogout() {

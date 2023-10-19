@@ -8,6 +8,7 @@ IConfiguration configuration = new ConfigurationBuilder()
     .Build();
 
 builder.Services.AddDbContext<DBContext>(options => options.UseMySQL(configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Singleton);
+builder.Services.AddTransient<DBContext>();
 
 builder.Services.AddCors(options =>
 {
@@ -16,7 +17,7 @@ builder.Services.AddCors(options =>
         {
             builder.AllowAnyOrigin()
                 .AllowAnyHeader()
-                .AllowAnyMethod();
+                  .AllowAnyMethod();
         });
 });
 

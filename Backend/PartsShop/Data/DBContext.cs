@@ -12,8 +12,10 @@ namespace PartsShop.Data
         public virtual DbSet<Part> Parts { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<Cart> Carts { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Manufacturer> Manufactures{ get; set; }
         public virtual DbSet<CartProduct> CartProducts { get; set; }
+        public virtual DbSet<OrderProduct> OrderProducts { get; set; }
 
         public DBContext()
         {
@@ -22,7 +24,6 @@ namespace PartsShop.Data
 
         public DBContext(DbContextOptions<DBContext> options) : base(options)
         {
-
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -40,13 +41,6 @@ namespace PartsShop.Data
 
                 entity.ToTable("users");
 
-                entity.Property(e => e.Id).HasColumnName("Id");
-                entity.Property(e => e.Name).HasMaxLength(60).HasColumnName("Name");
-                entity.Property(e => e.Surname).HasMaxLength(60).HasColumnName("Surname");
-                entity.Property(e => e.Email).HasMaxLength(100).HasColumnName("Email");
-                entity.Property(e => e.Phone).HasMaxLength(12).HasColumnName("Phone");
-                entity.Property(e => e.PasswordHash).HasMaxLength(1000).HasColumnName("PasswordHash");
-                entity.Property(e => e.Token).HasMaxLength(1000).HasColumnName("Token");
                 entity.HasOne(e => e.Cart).WithOne().HasForeignKey<Cart>(d => d.UserId);
             });
 
@@ -55,12 +49,6 @@ namespace PartsShop.Data
                 entity.HasKey(e => e.Id).HasName("PRIMARY");
 
                 entity.ToTable("notifications");
-
-                entity.Property(e => e.Id).HasColumnName("Id");
-                entity.Property(e => e.UserId).HasColumnName("UserId");
-                entity.Property(e => e.Title).HasColumnName("Title");
-                entity.Property(e => e.Message).HasColumnName("Message");
-                entity.Property(e => e.IsRead).HasColumnName("IsRead");
             });
 
             modelBuilder.Entity<Part>(entity =>
@@ -69,15 +57,6 @@ namespace PartsShop.Data
 
                 entity.ToTable("parts");
 
-                entity.Property(e => e.Id).HasColumnName("Id");
-                entity.Property(e => e.ManufactureId).HasColumnName("ManufactureId");
-                entity.Property(e => e.Name).HasColumnName("Name");
-                entity.Property(e => e.VendorCode).HasColumnName("VendorCode");
-                entity.Property(e => e.PartSubDescription).HasColumnName("partSubDescription");
-                entity.Property(e => e.Description).HasColumnName("Description");
-                entity.Property(e => e.Availability).HasColumnName("Availability");
-                entity.Property(e => e.Delivery).HasColumnName("Delivery");
-                entity.Property(e => e.Price).HasColumnName("Price");
                 entity.HasOne(d => d.Manufacturer).WithMany().HasForeignKey(d => d.ManufactureId);
             });
 
@@ -86,9 +65,6 @@ namespace PartsShop.Data
                 entity.HasKey(e => e.Id).HasName("PRIMARY");
 
                 entity.ToTable("manufactures");
-
-                entity.Property(e => e.Id).HasColumnName("Id");
-                entity.Property(e => e.Name).HasColumnName("Name");
             });
 
             modelBuilder.Entity<Cart>(entity =>
@@ -98,11 +74,25 @@ namespace PartsShop.Data
                 entity.ToTable("carts");
             });
 
+            modelBuilder.Entity<Order>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.ToTable("orders");
+            });
+
             modelBuilder.Entity<CartProduct>(entity =>
             {
                 entity.HasKey(e => new { e.PartId, e.CartId });
 
                 entity.ToTable("cartproducts");
+            });
+
+            modelBuilder.Entity<OrderProduct>(entity =>
+            {
+                entity.HasKey(e => new { e.PartId, e.OrderId });
+
+                entity.ToTable("orderproducts");
             });
 
             OnModelCreatingPartial(modelBuilder);

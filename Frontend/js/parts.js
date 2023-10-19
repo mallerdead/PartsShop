@@ -5,23 +5,29 @@ const searchInput = document.querySelector(".search-input");
 
 function searchSubmit(event) {
   event.preventDefault();
-  fetch(
-    `https://localhost:7164/parts/find-part?searchData=${searchInput.value}`
-  )
-    .then((response) => {
-      if (response.status === 200) {
-        return response.json();
-      } else {
-        Promise.reject();
-      }
-    })
-    .then((data) => {
-      renderParts(data);
-    });
+
+  if (localStorage.getItem("searchString") == searchInput.value) {
+    renderParts(JSON.parse(localStorage.getItem("searchResult")));
+  } else {
+    fetch(
+      `https://localhost:7164/parts/find-part?searchData=${searchInput.value}`
+    )
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          Promise.reject();
+        }
+      })
+      .then((data) => {
+        localStorage.setItem("searchResult", JSON.stringify(data));
+        localStorage.setItem("searchString", searchInput.value);
+        renderParts(data);
+      });
+  }
 }
 
 function renderParts(data) {
-  localStorage.setItem("searchResult", JSON.stringify(data));
   partsBlock.innerHTML = `
   <div class="parts-header">
     <div class="part-info">
@@ -63,7 +69,19 @@ function renderParts(data) {
 
   addToCartBtns.forEach((addToCartBtn) => {
     addToCartBtn.addEventListener("click", () => {
-      addToCart(addToCartBtn.parentNode.parentNode.id);
+      verifyToken()
+        .then(getUser)
+        .then((user) =>
+          addToCart(addToCartBtn.parentNode.parentNode.id, user.cart.id)
+        )
+        .then((response) => {
+          if (response.status == 200) {
+            return response.json();
+          } else {
+            Promise.reject();
+          }
+        })
+        .then(renderCart);
     });
   });
 
@@ -77,13 +95,26 @@ function renderParts(data) {
   const moreInfoButtons = document.querySelectorAll(".more-info");
   moreInfoButtons.forEach((btn) =>
     btn.addEventListener("click", () => {
-      window.open(
+      window.location.href =
         "productInfo.html" +
-          "?partId=" +
-          encodeURIComponent(btn.parentNode.parentNode.id)
-      );
+        "?partId=" +
+        encodeURIComponent(btn.parentNode.parentNode.id);
     })
   );
+}
+
+async function getPartById(id) {
+  try {
+    const response = await fetch(`https://localhost:7164/parts/part?id=${id}`);
+    if (response.status === 200) {
+      return await response.json();
+    } else {
+      throw new Error("Request failed");
+    }
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 }
 
 searchForm.addEventListener("submit", searchSubmit);

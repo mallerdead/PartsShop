@@ -26,7 +26,7 @@ namespace PartsShop.Controllers
         [HttpGet("verify-token")]
         public async Task<ActionResult<int>> VerifyToken()
         {
-            var user = await DBContext.Users.Where(user => user.Token == Request.Headers.Authorization.ToString()).FirstOrDefaultAsync();
+            var user = await DBContext.Users.FirstOrDefaultAsync(user => user.Token == Request.Headers.Authorization.ToString());
 
             if (user != null)
             {
@@ -39,11 +39,10 @@ namespace PartsShop.Controllers
         [HttpGet("user/")]
         public async Task<ActionResult<UserDTO>> GetUserById([FromQuery] int id)
         {
-            var notifications = await DBContext.Notifications.ToListAsync();
-            var parts = await DBContext.Parts.ToListAsync();
-            var cart = await DBContext.Carts.ToListAsync();
-            var user = await DBContext.Users.Where(user => user.Id == id).FirstOrDefaultAsync();
-            var products = await DBContext.CartProducts.ToListAsync();
+            var user = await DBContext.Users.Include(user => user.Notifications)
+                .Include(t => t.Cart).ThenInclude(t => t.Products).ThenInclude(t => t.Part).ThenInclude(t => t.Manufacturer)
+                .Include(t => t.Orders).ThenInclude(t => t.Products).ThenInclude(t => t.Part).ThenInclude(t => t.Manufacturer)
+                .FirstOrDefaultAsync(user => user.Id == id);
 
             if (user != null)
             {
@@ -55,6 +54,7 @@ namespace PartsShop.Controllers
                     Email = user.Email,
                     Phone = user.Phone,
                     Cart = user.Cart,
+                    Orders = user.Orders,
                     Notifications = user.Notifications
                 };
 

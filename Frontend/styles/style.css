@@ -22,16 +22,15 @@ button {
   padding: 0;
 }
 
-svg {
-  width: 100%;
-  height: 100%;
-}
-
 .menu-wrapper {
   width: 100%;
   display: flex;
   flex-direction: column;
   row-gap: 40px;
+}
+
+.logo {
+  height: 58px;
 }
 
 .logo img {
@@ -134,14 +133,24 @@ header {
   color: #f4f5f7;
 }
 
-.nav-link.active .home-img,
-.nav-link:hover .home-img {
-  content: url(../assets/homeBack.svg);
+.nav-link .nav-icon.history path {
+  fill: rgb(55.294118%, 60%, 67.843137%);
+  transition: fill 0.5s ease;
 }
 
-.nav-link.active .history-img,
-.nav-link:hover .history-img {
-  content: url(../assets/historyBack.svg);
+.nav-link:hover .nav-icon.history path,
+.nav-link.active .nav-icon.history path {
+  fill: white;
+}
+
+.nav-link .nav-icon.home path {
+  stroke: rgb(55.294118%, 60%, 67.843137%);
+  transition: stroke 0.5s ease;
+}
+
+.nav-link:hover .nav-icon.home path,
+.nav-link.active .nav-icon.home path {
+  stroke: white;
 }
 
 /* layout */

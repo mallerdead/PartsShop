@@ -15,13 +15,13 @@ namespace PartsShop.Controllers
         {
             this.DBContext = DBContext;
         }
+
         [HttpGet("find-part")]
         public async Task<ActionResult<List<Part>>> FindPart([FromQuery] string searchData)
         {
             var keyWords = searchData.ToLower().Split();
             var result = new List<Part>();
-            var manufatures = await DBContext.Manufactures.ToListAsync();
-            var parts = await DBContext.Parts.ToListAsync();
+            var parts = await DBContext.Parts.Include(part => part.Manufacturer).ToListAsync();
 
             foreach (var keyWord in keyWords)
             {
@@ -48,14 +48,12 @@ namespace PartsShop.Controllers
         [HttpGet("part")]
         public async Task<ActionResult> GetPartById([FromQuery] int id)
         {
-            var part = await DBContext.Parts.Where(part => part.Id == id).FirstOrDefaultAsync();
-            var manufactures = await DBContext.Manufactures.ToListAsync();
+            var part = await DBContext.Parts.Include(part => part.Manufacturer).FirstOrDefaultAsync(p => p.Id == id);
 
             if (part != null)
             {
                 return Ok(part);
             }
-
             return NotFound();
         }
     }
